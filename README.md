@@ -32,4 +32,4 @@ Una vez finalizada la descarga, ingresa a la carpeta principal del proyecto:
 cd Binary_Relations-
 ```
 
-A partir de aquí, dirígete a la subcarpeta del lenguaje que desees utilizar (`Cpp` o `Python`) y sigue las instrucciones detalladas en su respectivo archivo `README.md`.2
+A partir de aquí, dirígete a la subcarpeta del lenguaje que desees utilizar (`Cpp` o `Python`) y sigue las instrucciones detalladas en su respectivo archivo `README.md`.
