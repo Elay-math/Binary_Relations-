@@ -23,7 +23,7 @@ Para obtener una copia de este proyecto en tu entorno local, es necesario contar
 Abre tu terminal y ejecuta el siguiente comando para descargar el repositorio:
 
 ```bash
-git clone [https://github.com/Elay-math/Binary_Relations-.git](https://github.com/Elay-math/Binary_Relations-.git)
+git clone https://github.com/Elay-math/Binary_Relations-.git
 ```
 
 Una vez finalizada la descarga, ingresa a la carpeta principal del proyecto:
@@ -32,4 +32,4 @@ Una vez finalizada la descarga, ingresa a la carpeta principal del proyecto:
 cd Binary_Relations-
 ```
 
-A partir de aquí, dirígete a la subcarpeta del lenguaje que desees utilizar (`Cpp` o `Python`) y sigue las instrucciones detalladas en su respectivo archivo `README.md`.
+A partir de aquí, dirígete a la subcarpeta del lenguaje que desees utilizar (`Cpp` o `Python`) y sigue las instrucciones detalladas en su respectivo archivo `README.md`.2
