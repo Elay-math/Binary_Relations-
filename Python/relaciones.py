@@ -85,19 +85,17 @@ tamano_nodo = max(250, 1200 - (n * 25))
 tamano_fuente = max(7, 14 - (n // 4))
 tamano_flecha = max(10, 20 - (n // 4))
 
-nx.draw(G, pos,
-        with_labels=True, 
-        node_color='black', 
-        font_color='white', 
-        node_size=tamano_nodo, 
-        font_size=tamano_fuente,
-        font_weight='bold',
-        arrows=True, 
-        arrowsize=tamano_flecha, 
-        edge_color='#444444',
-        width=1.0)
+nx.draw_networkx_nodes(G, pos, node_color='black', node_size=tamano_nodo)
+nx.draw_networkx_labels(G, pos, font_color='white', font_size=tamano_fuente, font_weight='bold')
+nx.draw_networkx_edges(G, pos, arrows=True, arrowsize=tamano_flecha, edge_color='#444444', width=1.5, node_size=tamano_nodo, connectionstyle='arc3, rad=0.15')
 
-plt.margins(0.3)
+plt.margins(0.5)
+
+plt.xticks([])
+plt.yticks([])
+for spine in plt.gca().spines.values():
+    spine.set_linewidth(2)
+    spine.set_color('black')
 
 texto_cuadro = (
     " Propiedades de la Relación \n"
@@ -107,11 +105,10 @@ texto_cuadro = (
     f" • {Transitividad}"
 ) 
 
-#plt.text(1.0, 0.0, texto_cuadro, transform=plt.gca().transAxes,
- #        fontsize=12, verticalalignment='bottom', horizontalalignment='right',
-  #       multialignment='left',
-   #      fontfamily='monospace', fontweight='bold', color='#2b2d42',
-    #     bbox=dict(boxstyle='round,pad=0.8', facecolor='#f8f9fa', 
-     #              edgecolor='#8d99ae', alpha=0.95, linewidth=1.5))
+plt.text(0.95, 0.05, texto_cuadro, transform=plt.gca().transAxes,
+         fontsize=12, verticalalignment='bottom', horizontalalignment='right',
+         multialignment='left', fontfamily='monospace', fontweight='bold', color='black',
+         bbox=dict(boxstyle='square,pad=1.0', facecolor='white', 
+                   edgecolor='black', alpha=1.0, linewidth=2.0))
 
 plt.show()
