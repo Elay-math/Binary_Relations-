@@ -107,11 +107,11 @@ texto_cuadro = (
     f" • {Transitividad}"
 ) 
 
-plt.text(1.0, 0.0, texto_cuadro, transform=plt.gca().transAxes,
-         fontsize=12, verticalalignment='bottom', horizontalalignment='right',
-         multialignment='left',
-         fontfamily='monospace', fontweight='bold', color='#2b2d42',
-         bbox=dict(boxstyle='round,pad=0.8', facecolor='#f8f9fa', 
-                   edgecolor='#8d99ae', alpha=0.95, linewidth=1.5))
+#plt.text(1.0, 0.0, texto_cuadro, transform=plt.gca().transAxes,
+ #        fontsize=12, verticalalignment='bottom', horizontalalignment='right',
+  #       multialignment='left',
+   #      fontfamily='monospace', fontweight='bold', color='#2b2d42',
+    #     bbox=dict(boxstyle='round,pad=0.8', facecolor='#f8f9fa', 
+     #              edgecolor='#8d99ae', alpha=0.95, linewidth=1.5))
 
 plt.show()
