@@ -204,3 +204,11 @@ M^2 = \begin{bmatrix}
 $$
 
 Al comparar $M^2$ con la matriz original $M$, verificamos que en cada posición donde $M^2$ tiene un valor positivo (los números 3 y el 1), la matriz original $M$ también tiene un valor positivo en esa misma posición. Al cumplirse esta condición en todas las entradas, el programa determina que la relación es **Transitiva**.
+
+---
+
+# Resultado
+
+Por lo que finalmente tenemos como output la visualización generada por Matplotlib, confirmando en su panel de información que la relación evaluada cumple analíticamente con las tres propiedades (una Relación de Equivalencia):
+
+![Resultado del análisis](resources/output.png)
