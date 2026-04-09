@@ -114,3 +114,29 @@ O(n^2 \log n)
 Este proyecto demuestra cómo modelar propiedades fundamentales de relaciones binarias en C++, combinando estructuras de datos y análisis de complejidad.
 
 Además, permite entender cómo decisiones de implementación (como usar `set`) impactan directamente en el rendimiento.
+
+---
+
+## ▶️ Cómo ejecutar el programa
+
+### 🛠️ Requisitos
+
+- Tener instalado un compilador de C++ (g++, clang o similar)
+
+---
+
+### ⚙️ Compilación
+
+Desde la terminal, ubicarse en la carpeta del proyecto y ejecutar:
+
+```bash
+g++ RelacionBinaria.cpp -o RelacionBinaria
+
+---
+
+### ▶️ Ejecución
+
+Una vez compilado, ejecutar:
+
+```bash
+./RelacionBinaria o RelacionBinaria.exe
