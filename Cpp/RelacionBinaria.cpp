@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <set>
 using namespace std;
 //Relacion Binaria. primer c�digo Teor�a de Conjuntos
 //En funciones cuando se pasa como parametro const indica solo lectura, es decir, es un apuntador pero no permite modificar lo que se pasó como parámetro :)
@@ -16,124 +17,101 @@ void Capture_BinRelation(vector <vector<int>> &M){
             cin>>M[i][j];
         }
     }
-    
 }
+//Con esta funcion vamos a obtener un set a partir de la matriz de relaciones
+set<pair<int,int>> Convertion(const vector <vector<int>> &M){
+    set <pair<int,int>> Relation;
+    for(size_t i=0;i<M.size();i++){
+        Relation.insert({M[i][0],M[i][1]});
+    }
+    return Relation;
+}
+
 //O(n*l)
-bool Reflexive(const vector <vector<int>> &M, const vector <int> &S){
-    //Para cada elemento en el set recorro la matriz como tuplas, ya que sé que solo hay dos columnas y verifico que exista la tupla (S[i],S[i]) para todos los elementos del set
+bool Reflexive(const set <pair<int,int>> & Set, const vector <int> &S){
+    //Para cada elemento en S recorro el set buscando que exista la tupla (S[i],S[i]) para todos los elementos del set
     for(size_t i=0;i<S.size();i++){
-        //Inicializamos un bool en false que indica si existe la tupla de relación 
-        bool existence=false;
-        for(size_t j=0;j<M.size();j++){
-        if( M[j][0]==S[i] && M[j][1]==S[i]){
-            //si la tupla existe marcamos existencia y rompemos el ciclo porque ya no aporta nada seguir buscando
-            existence= true; 
-            break;   
-        }
-        }
-         if(!existence){
+        if(!Set.count({S[i],S[i]})){
             return false;
-        }   
+        }
         }
         return true;
 } 
 //La lógica es practicamente la misma que la de reflexiva solo que aqui si encuentro alguna tupla (s[i],s[i]) pues ya no puede ser irreflexiva
 //Note que una no es estrictamente la negación de la otra por lo que se puede dar el caso de una relacion binaria no reflexiva y no irreflexiva por lo que es necesario tener las dos programadas
-bool Irreflexive(const vector <vector<int>> &M, const vector <int> &S){
+bool Irreflexive(const set <pair<int,int>> &Set, const vector <int> &S){
     for(size_t i=0;i<S.size();i++){
-        for (size_t j = 0; j <M.size(); j++){
-           if( M[j][0]==S[i] && M[j][1]==S[i]){
-            return false;
-        }  
-        }
-        
+       if(Set.count({S[i],S[i]})){
+        return false;
+       } 
     }
     return true;
 }
-//Estoy consciente de que esto busca doble vez por cada tupla si existe la simetria de esa tupla (primero que quede bien hecha y ya luego la optimizo ) O(l^2
-bool Simmetry(const vector <vector<int>> &M){
-    //fijamos el i-ésimo elemento y creamos el bool que nos indicará si existe la tupla simétrica
+//O(l*logl)
+bool Symmetry(const vector <vector<int>> &M, const set <pair<int,int>> &Set){
+    //iteramos sobre los elementos de la matriz
     for (size_t i = 0; i < M.size(); i++){
-        bool simmetric= false;
-        //buscamos desde el principio de la matriz a la tupla simétrica
-        for (size_t j = 0; j < M.size(); j++){
-            //si existe entonces hacemos true el booleano 
-            if (M[i][0]==M[j][1] && M[i][1]==M[j][0]){
-                simmetric= true;
-                break;
-            }
+        //si no existe la tupla simetrica para cada elemento de la matriz retornamos false
+        if(!Set.count({M[i][1],M[i][0]})){
+            return false;
         }
-        //si no existe ya rifamos
-            if(!simmetric){
-                return false;
-            }
+        }
+        return true;
     }
-    return true;
-}
-//Esta madre también tiene un tiempo de operación muy grande, pero la hago y ahorita pienso como lo puedo reducir O(l^3)
-bool Transitive(const vector <vector<int>> &M){
+
+// O(l^2*logl)
+bool Transitive(const vector <vector<int>> &M, const set <pair<int,int>> &Set){
     //fijamos la i-esima fila
     for (size_t i = 0; i < M.size(); i++){
         for (size_t j = 0; j < M.size(); j++){
-            //si existe alguna tupla que empiece con la segunda entrada de la i-esima fila entonces tenemos que encontrar la tupla las hace transitivas
-            if(M[j][0]==M[i][1]){
-                bool triple=false;
-                for (size_t k = 0; k < M.size(); k++){
-                    //si existe marcamos check y rompemos el ciclo
-                    if(M[k][0]==M[i][0] && M[k][1]==M[j][1]){
-                        triple=true;
-                        break;
-                    }           
-                 }
-                 //si no existe ya rifamos
-                 if(!triple){
-                    return false;
-                 }
+            //si existe alguna tupla que empiece con la segunda entrada de la i-esima fila entonces tenemos que encontrar la tupla que las hace transitivas
+            //entonces para eso buscamos en el set la primera entrada de la i-ésima y la segunda entrada de la j-ésima, si no existe retornamos false
+            if(M[j][0]==M[i][1] && !Set.count({M[i][0],M[j][1]})){
+                return false;
              }
         }
     }
     return true;
 }
 
-
-
-
 int main(){
-cout<<"Primer aproximacion para el codigo"<<endl;
+cout<<"Primer codigo de Teoria de Conjuntos; propiedades de relaciones binarias"<<endl;
 int n,m;
-cout<<"Ingrese el tamano del conjuto"<<endl;
+cout<<"Ingrese la cardinalidad del conjuto"<<endl;
 cin>>n;
 vector <int> Nums(n);
 Capture_Set(Nums);
-cout<<"El vector es:"<<endl;
+cout<<"El conjunto es:"<<endl;
 for(size_t i=0;i<Nums.size();i++){
     cout<<Nums[i]<<" ";
 }
 cout<<endl;
-cout<<"Ingrese la cardinalidad de la relacion"<<endl;
+cout<<"Ingrese la cardinalidad de la relacion: "<<endl;
 cin>>m;
 vector <vector<int>> Relation(m,vector<int>(2));
 Capture_BinRelation(Relation);
-for (size_t i = 0; i< Relation.size(); i++)
-{
-    for (size_t j = 0; j < Relation[i].size(); j++)
-    {
+//Transformamos la matriz en un set de pares una sola vez
+set <pair<int,int>> Set = Convertion(Relation);
+
+cout<<"La matriz de relacion es: "<<endl;
+for (size_t i = 0; i< Relation.size(); i++){
+    for (size_t j = 0; j < Relation[i].size(); j++){
         cout<<Relation[i][j]<<" ";
     }
-    
+    cout<<endl;
 }
 cout<<endl;
 
-if(Reflexive(Relation,Nums)){
+if(Reflexive(Set,Nums)){
     cout<<"La relacion es reflexiva"<<endl;
 }
-if(Irreflexive(Relation,Nums)){
-    cout<<"La relacion es irreflxiva"<<endl;
+if(Irreflexive(Set,Nums)){
+    cout<<"La relacion es irreflexiva"<<endl;
 }
-if(Simmetry(Relation)){
+if(Symmetry(Relation,Set)){
     cout<<"La relacion es simetrica"<<endl;
 }
-if(Transitive(Relation)){
+if(Transitive(Relation,Set)){
     cout<<"La relacion es transitiva"<<endl;
 }
 return 0;
